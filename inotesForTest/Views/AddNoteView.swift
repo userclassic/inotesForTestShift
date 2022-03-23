@@ -44,14 +44,6 @@ struct AddNoteView: View {
                 focys = .text
             }
         }
-        .toolbar {
-            ToolbarItem {
-                Button ("Donne") {
-                    print("YYYEs")
-                }
-            }
-        }
-
     }
 }
 
