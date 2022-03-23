@@ -7,14 +7,44 @@
 
 import SwiftUI
 import CoreData
+// Конструкции
+extension View { // общие стили для кнопки и т
+    func myCentrButton() -> some View {
+        HStack {
+            Spacer()
+            self
+                .font(.headline)
+                .padding()
+            Spacer()
+        }
+    }
+
+    func myRightButton() -> some View {
+        HStack {
+            Spacer()
+            self
+                .font(.headline)
+                .padding()
+        }
+    }
+
+    func myTextEdit() -> some View {
+        self
+            .padding()
+            .lineSpacing(.leastNormalMagnitude)
+            .font(.title2.weight(.thin).monospaced())
+    }
+}
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var maneObjContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var note: FetchedResults<Notes>
     
     @State private var showAddView = false
+    
+    @StateObject var globa = DataController()
 
-
+    
 
     var body: some View {
 
@@ -52,6 +82,7 @@ struct ContentView: View {
                         Spacer(minLength: 16)*/
                         Button {
                             showAddView.toggle()
+                            //globa.focusal = true
                         } label: {
                             Label ("add note", systemImage: "plus.app")
                         }

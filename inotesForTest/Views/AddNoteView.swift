@@ -7,19 +7,26 @@
 
 import SwiftUI
 
+enum FocusableField: Hashable {
+    case text
+    case password
+}
+
 struct AddNoteView: View {
     @Environment(\.managedObjectContext) var manObjContext
     @Environment(\.dismiss) var dismiss
     @State private var name = ""
+    @FocusState private var focys: FocusableField?
+
 
     var body: some View {
-        VStack{
+        VStack {
             TextEditor(text: $name)
-                .padding()
-                .lineSpacing(.leastNormalMagnitude)
-                .font(.title2.weight(.thin).monospaced())
+                .myTextEdit()
+                .focused($focys, equals: .text)
+                
 
-            Button("Add Note") {
+            Button("Done") {
                 if name == "" {
                     dismiss()
                 } else {
@@ -27,9 +34,24 @@ struct AddNoteView: View {
                     dismiss()
                 }
             }
-            .font(.headline)
-            .padding()
+            .myRightButton()
+            .buttonStyle(.bordered)
+            .tint(.accentColor)
         }
+        .onAppear {
+            print("WORK Add!")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                focys = .text
+            }
+        }
+        .toolbar {
+            ToolbarItem {
+                Button ("Donne") {
+                    print("YYYEs")
+                }
+            }
+        }
+
     }
 }
 

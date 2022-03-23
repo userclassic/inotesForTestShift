@@ -7,29 +7,44 @@
 
 import SwiftUI
 
+enum FocusableFieldE: Hashable {
+    case text
+    case password
+}
+
 struct EditNoteView: View {
     @Environment(\.managedObjectContext) var manObjContext
     @Environment(\.dismiss) var dismiss
     var note: FetchedResults<Notes>.Element
     @State private var name = ""
+    @FocusState private var focys: FocusableFieldE?
 
     var body: some View {
         VStack {
             TextEditor(text: $name)
-                .padding(.horizontal)
-                .lineSpacing(.leastNormalMagnitude)
-                .font(.title2.weight(.thin).monospaced())
+                .myTextEdit()
+                .focused($focys, equals: .text)
                 .onAppear {
                     name = note.name!
                 }
 
-            Button("Save"){
-                DataController().editNote(note: note, name: name, context: manObjContext)
-                dismiss()
-            }
-            .font(.headline)
-            .padding()
+//            Button("Save"){
+//                DataController().editNote(note: note, name: name, context: manObjContext)
+//                dismiss()
+//            }
+//            .myCentrButton()
 
+        }
+        .onAppear {
+            print("WORK edit!")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                focys = .text
+            }
+        }
+        .onDisappear {
+            print("DIS whis")
+            DataController().editNote(note: note, name: name, context: manObjContext)
+            dismiss()
         }
         .listStyle(.plain)
         .navigationBarTitleDisplayMode(.inline)
