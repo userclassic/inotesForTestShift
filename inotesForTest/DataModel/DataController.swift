@@ -11,7 +11,6 @@ import SwiftUI
 
 class DataController: ObservableObject {
     let conteiner = NSPersistentContainer(name: "NoteModel")
-    
 
     init() {
         conteiner.loadPersistentStores { desc, error in

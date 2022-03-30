@@ -7,28 +7,9 @@
 
 import SwiftUI
 import CoreData
-// Конструкции
-extension View { // общие стили для кнопки и т
-    func myCentrButton() -> some View {
-        HStack {
-            Spacer()
-            self
-                .font(.headline)
-                .padding()
-            Spacer()
-        }
-    }
-
-    func myRightButton() -> some View {
-        HStack {
-            Spacer()
-            self
-                .font(.headline)
-                .padding()
-        }
-    }
-
-    func myTextEdit() -> some View {
+// общие стили
+extension View {
+    func myTextEdit() -> some View { // дополнительний стиль
         self
             .padding()
             .lineSpacing(.leastNormalMagnitude)
@@ -40,14 +21,15 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var maneObjContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var note: FetchedResults<Notes>
     
-    @State private var showAddView = false
+    @State private var showAddView = false //Переключатели всплывающего окна
+    @State private var showSettings = false
     
     @StateObject var globa = DataController()
 
-    
+    //@StateObject var toggle = MyUserSettings() // если переносить и тулбаритемы
+
 
     var body: some View {
-
         NavigationView {
             VStack(alignment: .leading) {
                 List {
@@ -56,8 +38,9 @@ struct ContentView: View {
                             VStack(alignment: .leading, spacing: 8){
                                 Text("\(note.name!)")
                                     .lineLimit(2)
-                                    .font(.headline.monospaced())
+                                    .font(.headline.monospaced()) //основной шрифт
                                 HStack {
+                                    // тут время редактирования и как давно редактировал
                                     Text("\(note.date!,format: .dateTime)  ~ \(calcuTime(date:note.date!))")
                                         .font(.caption.italic().monospaced())
                                         .foregroundColor(.secondary)
@@ -65,43 +48,49 @@ struct ContentView: View {
                             }
                         }
                     }
-                    .onDelete(perform: delNote(offsets:))
+                    .onDelete(perform: delNote(offsets:)) // функция удаления
                 }
                 .listStyle(.plain)
             }
             .navigationBarTitle("AllNotes",displayMode: .automatic)
+
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem {
                     HStack{
-                        /*Button {
-                            showAddView.toggle()
+                        Button {
+                            showSettings.toggle()
                             print("Show settings")
                         } label: {
                             Label ("Settings", systemImage: "person.fill")
                         }
-                        Spacer(minLength: 16)*/
+                        Spacer(minLength: 16)
                         Button {
                             showAddView.toggle()
-                            //globa.focusal = true
                         } label: {
                             Label ("add note", systemImage: "plus.app")
                         }
                     }
                 }
-                /*ToolbarItem (placement: .navigationBarLeading) {
-                    //EditButton()
+
+                ToolbarItem {
+                    // добавить подсчет заметок
                     Text("16 Notes ")
                         .foregroundColor(.secondary)
                         .font(.system(.footnote))
-                }*/
+                }
+
             }
             .sheet(isPresented: $showAddView) {
                 AddNoteView()
+
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView(togol: MyUserSettings())
             }
         }
-        .navigationViewStyle(.stack)
+        .navigationViewStyle(.stack) 
     }
-    private func delNote (offsets: IndexSet) {
+    private func delNote (offsets: IndexSet) { // функция удаления
         withAnimation {
             offsets.map {note[$0]}.forEach(maneObjContext.delete)
             DataController().save(context: maneObjContext)

@@ -16,6 +16,7 @@
 		7A7C8AD327E3112E001EBE0D /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C8AD227E3112E001EBE0D /* AddNoteView.swift */; };
 		7A7C8AD527E3144A001EBE0D /* TimeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C8AD427E3144A001EBE0D /* TimeFormat.swift */; };
 		7A7C8AD727E34094001EBE0D /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C8AD627E34093001EBE0D /* EditNoteView.swift */; };
+		7AD80B9C27EDF926006C35D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD80B9B27EDF926006C35D6 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		7A7C8AD227E3112E001EBE0D /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		7A7C8AD427E3144A001EBE0D /* TimeFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormat.swift; sourceTree = "<group>"; };
 		7A7C8AD627E34093001EBE0D /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
+		7AD80B9B27EDF926006C35D6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		7A7C8AD027E310AD001EBE0D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7AD80B9B27EDF926006C35D6 /* SettingsView.swift */,
 				7A60DDA327E307C000032995 /* ContentView.swift */,
 				7A7C8AD227E3112E001EBE0D /* AddNoteView.swift */,
 				7A7C8AD627E34093001EBE0D /* EditNoteView.swift */,
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A60DDA427E307C000032995 /* ContentView.swift in Sources */,
+				7AD80B9C27EDF926006C35D6 /* SettingsView.swift in Sources */,
 				7A7C8ACF27E30AA3001EBE0D /* DataController.swift in Sources */,
 				7A60DDA227E307C000032995 /* inotesForTestApp.swift in Sources */,
 				7A7C8AD527E3144A001EBE0D /* TimeFormat.swift in Sources */,

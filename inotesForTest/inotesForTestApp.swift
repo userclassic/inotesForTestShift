@@ -8,6 +8,7 @@
 import SwiftUI
 
 @main
+
 struct inotesForTestApp: App {
     @StateObject private var dataController = DataController()
 

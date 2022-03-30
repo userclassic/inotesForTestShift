@@ -9,11 +9,12 @@ import SwiftUI
 
 enum FocusableFieldE: Hashable {
     case text
-    case password
+    //case password
 }
 
 struct EditNoteView: View {
     @Environment(\.managedObjectContext) var manObjContext
+
     @Environment(\.dismiss) var dismiss
     var note: FetchedResults<Notes>.Element
     @State private var name = ""
@@ -28,12 +29,6 @@ struct EditNoteView: View {
                     name = note.name!
                 }
 
-//            Button("Save"){
-//                DataController().editNote(note: note, name: name, context: manObjContext)
-//                dismiss()
-//            }
-//            .myCentrButton()
-
         }
         .onAppear {
             print("WORK edit!")
@@ -42,11 +37,16 @@ struct EditNoteView: View {
             }
         }
         .onDisappear {
+            if name == "" {
+                name = name
+            } else {
             print("DIS whis")
             DataController().editNote(note: note, name: name, context: manObjContext)
             dismiss()
+            }
         }
         .listStyle(.plain)
         .navigationBarTitleDisplayMode(.inline)
     }
+
 }

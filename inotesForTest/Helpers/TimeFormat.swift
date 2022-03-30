@@ -8,7 +8,7 @@
 import Foundation
 
 func calcuTime(date:Date) -> String {
-    let mints = Int(-date.timeIntervalSinceNow)/60
+    let mints = Int(-date.timeIntervalSinceNow)/60 // минуты от сейчас
     let hours = mints/24
     let days = hours/24
 
